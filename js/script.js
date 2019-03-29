@@ -7,14 +7,21 @@ function consoleText(words, id, colors) {
   var con = document.getElementById('console');
   var letterCount = 1;
   var x = 1;
+  var i = 0;
   var waiting = false;
   var target = document.getElementById(id)
   target.setAttribute('style', 'color:' + colors[0])
-  window.setInterval(function() {
 
+  // Выводит строку сообщения 
+  window.setInterval(function() {
     if (letterCount === 0 && waiting === false) {
       waiting = true;
       target.innerHTML = words[0].substring(0, letterCount)
+      i = i + 1;
+      console.log(i);
+        if ( i > 2 ) {
+        return i;
+        }
       window.setTimeout(function() {
         var usedColor = colors.shift();
         colors.push(usedColor);
@@ -37,14 +44,15 @@ function consoleText(words, id, colors) {
       letterCount += x;
     }
   }, 120)
+
+  //Мерцание курсора
   window.setInterval(function() {
+    if (i === 3) { return i; }
     if (visible === true) {
       con.className = 'console-underscore hidden'
       visible = false;
-
-    } else {
+    } else  {
       con.className = 'console-underscore'
-
       visible = true;
     }
   }, 400)
